@@ -1,0 +1,883 @@
+
+
+Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
+                                                                                               Thu Nov 03 14:44:16 2022
+
+Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
+     1                           	processor	18F4550
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	lm
+     5                           	psect	idataCOMRAM,global,class=CODE,delta=1
+     6                           	psect	idataBANK0,global,class=CODE,delta=1
+     7                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     8                           	psect	dataCOMRAM,global,class=COMRAM,space=1,delta=1
+     9                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1
+    10                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1
+    11                           	psect	text0,global,reloc=2,class=CODE,delta=1
+    12                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
+    13                           	psect	rparam,global,class=COMRAM,space=1,delta=1
+    14  0000                     
+    15                           	psect	idataCOMRAM
+    16  007D24                     __pidataCOMRAM:
+    17                           	opt stack 0
+    18                           
+    19                           ;initializer for main@F4448
+    20  007D24  0001               	dw	1
+    21  007D26  0000               	dw	0
+    22  007D28  0000               	dw	0
+    23  007D2A  0000               	dw	0
+    24                           
+    25                           	psect	idataBANK0
+    26  007D2C                     __pidataBANK0:
+    27                           	opt stack 0
+    28                           
+    29                           ;initializer for main@F4452
+    30  007D2C  0037               	dw	55
+    31  007D2E  0000               	dw	0
+    32  007D30  0034               	dw	52
+    33  007D32  0000               	dw	0
+    34  007D34  0031               	dw	49
+    35  007D36  0000               	dw	0
+    36  007D38  006F               	dw	111
+    37  007D3A  0000               	dw	0
+    38  007D3C  0038               	dw	56
+    39  007D3E  0000               	dw	0
+    40  007D40  0035               	dw	53
+    41  007D42  0000               	dw	0
+    42  007D44  0032               	dw	50
+    43  007D46  0000               	dw	0
+    44  007D48  0030               	dw	48
+    45  007D4A  0000               	dw	0
+    46  007D4C  0039               	dw	57
+    47  007D4E  0000               	dw	0
+    48  007D50  0036               	dw	54
+    49  007D52  0000               	dw	0
+    50  007D54  0033               	dw	51
+    51  007D56  0000               	dw	0
+    52  007D58  003D               	dw	61
+    53  007D5A  0000               	dw	0
+    54  007D5C  002F               	dw	47
+    55  007D5E  0000               	dw	0
+    56  007D60  0078               	dw	120
+    57  007D62  0000               	dw	0
+    58  007D64  002D               	dw	45
+    59  007D66  0000               	dw	0
+    60  007D68  002B               	dw	43
+    61  007D6A  0000               	dw	0
+    62  0000                     _ADCON1	set	4033
+    63  0000                     _BAUDCONbits	set	4024
+    64  0000                     _PORTDbits	set	3971
+    65  0000                     _RCSTAbits	set	4011
+    66  0000                     _TRISCbits	set	3988
+    67  0000                     _TRISD	set	3989
+    68  0000                     _TXREG	set	4013
+    69  0000                     _TXSTAbits	set	4012
+    70  0000                     _RD0	set	31768
+    71  0000                     _RD1	set	31769
+    72  0000                     _RD2	set	31770
+    73  0000                     _RD3	set	31771
+    74                           
+    75                           ; #config settings
+    76  0000                     
+    77                           	psect	cinit
+    78  007D6C                     __pcinit:
+    79                           	opt stack 0
+    80  007D6C                     start_initialization:
+    81                           	opt stack 0
+    82  007D6C                     __initialization:
+    83                           	opt stack 0
+    84                           
+    85                           ; Initialize objects allocated to BANK0 (64 bytes)
+    86                           ; load TBLPTR registers with __pidataBANK0
+    87  007D6C  0E2C               	movlw	low __pidataBANK0
+    88  007D6E  6EF6               	movwf	tblptrl,c
+    89  007D70  0E7D               	movlw	high __pidataBANK0
+    90  007D72  6EF7               	movwf	tblptrh,c
+    91  007D74  0E00               	movlw	low (__pidataBANK0 shr (0+16))
+    92  007D76  6EF8               	movwf	tblptru,c
+    93  007D78  EE00  F060         	lfsr	0,__pdataBANK0
+    94  007D7C  EE10 F040          	lfsr	1,64
+    95  007D80                     copy_data0:
+    96  007D80  0009               	tblrd		*+
+    97  007D82  CFF5 FFEE          	movff	tablat,postinc0
+    98  007D86  50E5               	movf	postdec1,w,c
+    99  007D88  50E1               	movf	fsr1l,w,c
+   100  007D8A  E1FA               	bnz	copy_data0
+   101                           
+   102                           ; Initialize objects allocated to COMRAM (8 bytes)
+   103                           ; load TBLPTR registers with __pidataCOMRAM
+   104  007D8C  0E24               	movlw	low __pidataCOMRAM
+   105  007D8E  6EF6               	movwf	tblptrl,c
+   106  007D90  0E7D               	movlw	high __pidataCOMRAM
+   107  007D92  6EF7               	movwf	tblptrh,c
+   108  007D94  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
+   109  007D96  6EF8               	movwf	tblptru,c
+   110  007D98  EE00  F054         	lfsr	0,__pdataCOMRAM
+   111  007D9C  EE10 F008          	lfsr	1,8
+   112  007DA0                     copy_data1:
+   113  007DA0  0009               	tblrd		*+
+   114  007DA2  CFF5 FFEE          	movff	tablat,postinc0
+   115  007DA6  50E5               	movf	postdec1,w,c
+   116  007DA8  50E1               	movf	fsr1l,w,c
+   117  007DAA  E1FA               	bnz	copy_data1
+   118  007DAC                     end_of_initialization:
+   119                           	opt stack 0
+   120  007DAC                     __end_of__initialization:
+   121                           	opt stack 0
+   122  007DAC  0100               	movlb	0
+   123  007DAE  EFD9  F03E         	goto	_main	;jump to C main() function
+   124                           tblptru	equ	0xFF8
+   125                           tblptrh	equ	0xFF7
+   126                           tblptrl	equ	0xFF6
+   127                           tablat	equ	0xFF5
+   128                           postinc0	equ	0xFEE
+   129                           postdec1	equ	0xFE5
+   130                           fsr1l	equ	0xFE1
+   131                           
+   132                           	psect	dataCOMRAM
+   133  000054                     __pdataCOMRAM:
+   134                           	opt stack 0
+   135  000054                     main@F4448:
+   136                           	opt stack 0
+   137  000054                     	ds	8
+   138                           tblptru	equ	0xFF8
+   139                           tblptrh	equ	0xFF7
+   140                           tblptrl	equ	0xFF6
+   141                           tablat	equ	0xFF5
+   142                           postinc0	equ	0xFEE
+   143                           postdec1	equ	0xFE5
+   144                           fsr1l	equ	0xFE1
+   145                           
+   146                           	psect	dataBANK0
+   147  000060                     __pdataBANK0:
+   148                           	opt stack 0
+   149  000060                     main@F4452:
+   150                           	opt stack 0
+   151  000060                     	ds	64
+   152                           tblptru	equ	0xFF8
+   153                           tblptrh	equ	0xFF7
+   154                           tblptrl	equ	0xFF6
+   155                           tablat	equ	0xFF5
+   156                           postinc0	equ	0xFEE
+   157                           postdec1	equ	0xFE5
+   158                           fsr1l	equ	0xFE1
+   159                           
+   160                           	psect	cstackCOMRAM
+   161  000001                     __pcstackCOMRAM:
+   162                           	opt stack 0
+   163  000001                     ??_main:
+   164                           
+   165                           ; 0 bytes @ 0x0
+   166  000001                     	ds	1
+   167  000002                     main@disp:
+   168                           	opt stack 0
+   169                           
+   170                           ; 64 bytes @ 0x1
+   171  000002                     	ds	64
+   172  000042                     main@Place:
+   173                           	opt stack 0
+   174                           
+   175                           ; 2 bytes @ 0x41
+   176  000042                     	ds	2
+   177  000044                     main@x:
+   178                           	opt stack 0
+   179                           
+   180                           ; 8 bytes @ 0x43
+   181  000044                     	ds	8
+   182  00004C                     main@j:
+   183                           	opt stack 0
+   184                           
+   185                           ; 2 bytes @ 0x4B
+   186  00004C                     	ds	2
+   187  00004E                     main@T:
+   188                           	opt stack 0
+   189                           
+   190                           ; 2 bytes @ 0x4D
+   191  00004E                     	ds	2
+   192  000050                     main@i:
+   193                           	opt stack 0
+   194                           
+   195                           ; 2 bytes @ 0x4F
+   196  000050                     	ds	2
+   197  000052                     main@z:
+   198                           	opt stack 0
+   199                           
+   200                           ; 2 bytes @ 0x51
+   201  000052                     	ds	2
+   202                           tblptru	equ	0xFF8
+   203                           tblptrh	equ	0xFF7
+   204                           tblptrl	equ	0xFF6
+   205                           tablat	equ	0xFF5
+   206                           postinc0	equ	0xFEE
+   207                           postdec1	equ	0xFE5
+   208                           fsr1l	equ	0xFE1
+   209                           
+   210 ;;
+   211 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   212 ;;
+   213 ;; *************** function _main *****************
+   214 ;; Defined at:
+   215 ;;		line 12 in file "main_transmisor.c"
+   216 ;; Parameters:    Size  Location     Type
+   217 ;;		None
+   218 ;; Auto vars:     Size  Location     Type
+   219 ;;  disp           64    1[COMRAM] long [4][4]
+   220 ;;  x               8   67[COMRAM] int [4]
+   221 ;;  y               8    0        int [4]
+   222 ;;  z               2   81[COMRAM] int 
+   223 ;;  i               2   79[COMRAM] int 
+   224 ;;  T               2   77[COMRAM] int 
+   225 ;;  j               2   75[COMRAM] int 
+   226 ;;  Place           2   65[COMRAM] int 
+   227 ;; Return value:  Size  Location     Type
+   228 ;;		None               void
+   229 ;; Registers used:
+   230 ;;		wreg, fsr1l, fsr1h, fsr2l, fsr2h, status,2, status,0
+   231 ;; Tracked objects:
+   232 ;;		On entry : 0/0
+   233 ;;		On exit  : 0/0
+   234 ;;		Unchanged: 0/0
+   235 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   236 ;;      Params:         0       0       0       0       0       0       0       0       0
+   237 ;;      Locals:        82       0       0       0       0       0       0       0       0
+   238 ;;      Temps:          1       0       0       0       0       0       0       0       0
+   239 ;;      Totals:        83       0       0       0       0       0       0       0       0
+   240 ;;Total ram usage:       83 bytes
+   241 ;; This function calls:
+   242 ;;		Nothing
+   243 ;; This function is called by:
+   244 ;;		Startup code after reset
+   245 ;; This function uses a non-reentrant model
+   246 ;;
+   247                           
+   248                           	psect	text0
+   249  007DB2                     __ptext0:
+   250                           	opt stack 0
+   251  007DB2                     _main:
+   252                           	opt stack 31
+   253                           
+   254                           ;main_transmisor.c: 14: ADCON1 = 0b111111;
+   255                           
+   256                           ;incstack = 0
+   257  007DB2  0E3F               	movlw	63
+   258  007DB4  6EC1               	movwf	4033,c	;volatile
+   259                           
+   260                           ;main_transmisor.c: 16: TRISD=0x0f;
+   261  007DB6  0E0F               	movlw	15
+   262  007DB8  6E95               	movwf	3989,c	;volatile
+   263                           
+   264                           ;main_transmisor.c: 17: int i =1;
+   265  007DBA  0E00               	movlw	0
+   266  007DBC  6E51               	movwf	main@i+1,c
+   267  007DBE  0E01               	movlw	1
+   268  007DC0  6E50               	movwf	main@i,c
+   269                           
+   270                           ;main_transmisor.c: 18: int j =0;
+   271  007DC2  0E00               	movlw	0
+   272  007DC4  6E4D               	movwf	main@j+1,c
+   273  007DC6  0E00               	movlw	0
+   274  007DC8  6E4C               	movwf	main@j,c
+   275                           
+   276                           ;main_transmisor.c: 19: int z =0;
+   277  007DCA  0E00               	movlw	0
+   278  007DCC  6E53               	movwf	main@z+1,c
+   279  007DCE  0E00               	movlw	0
+   280  007DD0  6E52               	movwf	main@z,c
+   281                           
+   282                           ;main_transmisor.c: 20: int T = 100;
+   283  007DD2  0E00               	movlw	0
+   284  007DD4  6E4F               	movwf	main@T+1,c
+   285  007DD6  0E64               	movlw	100
+   286  007DD8  6E4E               	movwf	main@T,c
+   287                           
+   288                           ;main_transmisor.c: 21: int Place =64;
+   289  007DDA  0E00               	movlw	0
+   290  007DDC  6E43               	movwf	main@Place+1,c
+   291  007DDE  0E40               	movlw	64
+   292  007DE0  6E42               	movwf	main@Place,c
+   293                           
+   294                           ;main_transmisor.c: 22: TRISCbits.RC6 =0;
+   295  007DE2  9C94               	bcf	3988,6,c	;volatile
+   296                           
+   297                           ;main_transmisor.c: 23: TXSTAbits.TX9 =0;
+   298  007DE4  9CAC               	bcf	4012,6,c	;volatile
+   299                           
+   300                           ;main_transmisor.c: 24: TXSTAbits.TXEN= 1;
+   301  007DE6  8AAC               	bsf	4012,5,c	;volatile
+   302                           
+   303                           ;main_transmisor.c: 25: TXSTAbits.SYNC =0;
+   304  007DE8  98AC               	bcf	4012,4,c	;volatile
+   305                           
+   306                           ;main_transmisor.c: 26: TXSTAbits.BRGH = 0;
+   307  007DEA  94AC               	bcf	4012,2,c	;volatile
+   308                           
+   309                           ;main_transmisor.c: 27: BAUDCONbits.BRG16= 0;
+   310  007DEC  96B8               	bcf	4024,3,c	;volatile
+   311                           
+   312                           ;main_transmisor.c: 28: RCSTAbits.SPEN =1;
+   313  007DEE  8EAB               	bsf	4011,7,c	;volatile
+   314                           
+   315                           ;main_transmisor.c: 30: int x[4]={1,0,0,0};
+   316  007DF0  EE20  F054         	lfsr	2,main@F4448
+   317  007DF4  EE10  F044         	lfsr	1,main@x
+   318  007DF8  0E07               	movlw	7
+   319  007DFA                     u241:
+   320  007DFA  CFDB FFE3          	movff	plusw2,plusw1
+   321  007DFE  06E8               	decf	wreg,f,c
+   322  007E00  E2FC               	bc	u241
+   323                           
+   324                           ;main_transmisor.c: 31: int y[4];
+   325                           ;main_transmisor.c: 32: long disp[4][4]={{'7','4','1','o'},
+   326                           ;main_transmisor.c: 33: {'8','5','2','0'},{'9','6','3','='},{'/','x','-','+'}};
+   327  007E02  EE20  F060         	lfsr	2,main@F4452
+   328  007E06  EE10  F002         	lfsr	1,main@disp
+   329  007E0A  0E3F               	movlw	63
+   330  007E0C                     u251:
+   331  007E0C  CFDB FFE3          	movff	plusw2,plusw1
+   332  007E10  06E8               	decf	wreg,f,c
+   333  007E12  E2FC               	bc	u251
+   334  007E14                     l788:
+   335                           
+   336                           ;main_transmisor.c: 39: PORTDbits.RD4= x[0];
+   337  007E14  B044               	btfsc	main@x,0,c
+   338  007E16  D002               	bra	u265
+   339  007E18  9883               	bcf	3971,4,c	;volatile
+   340  007E1A  D001               	bra	u266
+   341  007E1C                     u265:
+   342  007E1C  8883               	bsf	3971,4,c	;volatile
+   343  007E1E                     u266:
+   344                           
+   345                           ;main_transmisor.c: 40: PORTDbits.RD5= x[1];
+   346  007E1E  B046               	btfsc	main@x+2,0,c
+   347  007E20  D002               	bra	u275
+   348  007E22  9A83               	bcf	3971,5,c	;volatile
+   349  007E24  D001               	bra	u276
+   350  007E26                     u275:
+   351  007E26  8A83               	bsf	3971,5,c	;volatile
+   352  007E28                     u276:
+   353                           
+   354                           ;main_transmisor.c: 41: PORTDbits.RD6= x[2];
+   355  007E28  B048               	btfsc	main@x+4,0,c
+   356  007E2A  D002               	bra	u285
+   357  007E2C  9C83               	bcf	3971,6,c	;volatile
+   358  007E2E  D001               	bra	u286
+   359  007E30                     u285:
+   360  007E30  8C83               	bsf	3971,6,c	;volatile
+   361  007E32                     u286:
+   362                           
+   363                           ;main_transmisor.c: 42: PORTDbits.RD7= x[3];
+   364  007E32  B04A               	btfsc	main@x+6,0,c
+   365  007E34  D002               	bra	u295
+   366  007E36  9E83               	bcf	3971,7,c	;volatile
+   367  007E38  D001               	bra	u296
+   368  007E3A                     u295:
+   369  007E3A  8E83               	bsf	3971,7,c	;volatile
+   370  007E3C                     u296:
+   371                           
+   372                           ;main_transmisor.c: 44: _delay((unsigned long)((20)*(20000000/4000.0)));
+   373  007E3C  0E82               	movlw	130
+   374  007E3E  6E01               	movwf	??_main& (0+255),c
+   375  007E40  0EDE               	movlw	222
+   376  007E42                     u477:
+   377  007E42  2EE8               	decfsz	wreg,f,c
+   378  007E44  D7FE               	goto	u477
+   379  007E46  2E01               	decfsz	??_main& (0+255),f,c
+   380  007E48  D7FC               	goto	u477
+   381                           
+   382                           ;main_transmisor.c: 47: while (RD0 == 1){
+   383  007E4A  D023               	goto	l34
+   384  007E4C                     l36:
+   385  007E4C  A2AC               	btfss	4012,1,c	;volatile
+   386  007E4E  D7FE               	goto	l36
+   387                           
+   388                           ;main_transmisor.c: 50: TXREG = 'A';
+   389  007E50  0E41               	movlw	65
+   390  007E52  6EAD               	movwf	4013,c	;volatile
+   391                           
+   392                           ;main_transmisor.c: 51: _delay((unsigned long)((10)*(20000000/4000.0)));
+   393  007E54  0E41               	movlw	65
+   394  007E56  6E01               	movwf	??_main& (0+255),c
+   395  007E58  0EEE               	movlw	238
+   396  007E5A                     u487:
+   397  007E5A  2EE8               	decfsz	wreg,f,c
+   398  007E5C  D7FE               	goto	u487
+   399  007E5E  2E01               	decfsz	??_main& (0+255),f,c
+   400  007E60  D7FC               	goto	u487
+   401  007E62  D000               	nop2	
+   402                           
+   403                           ;main_transmisor.c: 52: while (z<T && RD1 ==1){
+   404  007E64  D00A               	goto	l39
+   405  007E66                     l802:
+   406                           
+   407                           ;main_transmisor.c: 54: z=z++;}
+   408  007E66  0E41               	movlw	65
+   409  007E68  6E01               	movwf	??_main& (0+255),c
+   410  007E6A  0EEE               	movlw	238
+   411  007E6C                     u497:
+   412  007E6C  2EE8               	decfsz	wreg,f,c
+   413  007E6E  D7FE               	goto	u497
+   414  007E70  2E01               	decfsz	??_main& (0+255),f,c
+   415  007E72  D7FC               	goto	u497
+   416  007E74  D000               	nop2	
+   417  007E76  4A52               	infsnz	main@z,f,c
+   418  007E78  2A53               	incf	main@z+1,f,c
+   419  007E7A                     l39:
+   420  007E7A  504E               	movf	main@T,w,c
+   421  007E7C  5C52               	subwf	main@z,w,c
+   422  007E7E  5053               	movf	main@z+1,w,c
+   423  007E80  0A80               	xorlw	128
+   424  007E82  6E01               	movwf	??_main& (0+255),c
+   425  007E84  504F               	movf	main@T+1,w,c
+   426  007E86  0A80               	xorlw	128
+   427  007E88  5801               	subwfb	??_main& (0+255),w,c
+   428  007E8A  A0D8               	btfss	status,0,c
+   429  007E8C  A283               	btfss	3971,1,c	;volatile
+   430  007E8E  D001               	goto	l34
+   431  007E90  D7EA               	goto	l802
+   432  007E92                     l34:
+   433  007E92  A083               	btfss	3971,0,c	;volatile
+   434  007E94  D024               	goto	l45
+   435  007E96  D7DA               	goto	l36
+   436  007E98                     l47:
+   437  007E98  A2AC               	btfss	4012,1,c	;volatile
+   438  007E9A  D7FE               	goto	l47
+   439                           
+   440                           ;main_transmisor.c: 59: TXREG = 'A';
+   441  007E9C  0E41               	movlw	65
+   442  007E9E  6EAD               	movwf	4013,c	;volatile
+   443                           
+   444                           ;main_transmisor.c: 60: _delay((unsigned long)((10)*(20000000/4000.0)));
+   445  007EA0  0E41               	movlw	65
+   446  007EA2  6E01               	movwf	??_main& (0+255),c
+   447  007EA4  0EEE               	movlw	238
+   448  007EA6                     u507:
+   449  007EA6  2EE8               	decfsz	wreg,f,c
+   450  007EA8  D7FE               	goto	u507
+   451  007EAA  2E01               	decfsz	??_main& (0+255),f,c
+   452  007EAC  D7FC               	goto	u507
+   453  007EAE  D000               	nop2	
+   454                           
+   455                           ;main_transmisor.c: 61: while (z<T && RD1 ==1){
+   456  007EB0  D00A               	goto	l50
+   457  007EB2                     l812:
+   458                           
+   459                           ;main_transmisor.c: 63: z=z++;}
+   460  007EB2  0E41               	movlw	65
+   461  007EB4  6E01               	movwf	??_main& (0+255),c
+   462  007EB6  0EEE               	movlw	238
+   463  007EB8                     u517:
+   464  007EB8  2EE8               	decfsz	wreg,f,c
+   465  007EBA  D7FE               	goto	u517
+   466  007EBC  2E01               	decfsz	??_main& (0+255),f,c
+   467  007EBE  D7FC               	goto	u517
+   468  007EC0  D000               	nop2	
+   469  007EC2  4A52               	infsnz	main@z,f,c
+   470  007EC4  2A53               	incf	main@z+1,f,c
+   471  007EC6                     l50:
+   472  007EC6  504E               	movf	main@T,w,c
+   473  007EC8  5C52               	subwf	main@z,w,c
+   474  007ECA  5053               	movf	main@z+1,w,c
+   475  007ECC  0A80               	xorlw	128
+   476  007ECE  6E01               	movwf	??_main& (0+255),c
+   477  007ED0  504F               	movf	main@T+1,w,c
+   478  007ED2  0A80               	xorlw	128
+   479  007ED4  5801               	subwfb	??_main& (0+255),w,c
+   480  007ED6  A0D8               	btfss	status,0,c
+   481  007ED8  A283               	btfss	3971,1,c	;volatile
+   482  007EDA  D001               	goto	l45
+   483  007EDC  D7EA               	goto	l812
+   484  007EDE                     l45:
+   485  007EDE  A283               	btfss	3971,1,c	;volatile
+   486  007EE0  D024               	goto	l56
+   487  007EE2  D7DA               	goto	l47
+   488  007EE4                     l58:
+   489  007EE4  A2AC               	btfss	4012,1,c	;volatile
+   490  007EE6  D7FE               	goto	l58
+   491                           
+   492                           ;main_transmisor.c: 69: TXREG = 'A';
+   493  007EE8  0E41               	movlw	65
+   494  007EEA  6EAD               	movwf	4013,c	;volatile
+   495                           
+   496                           ;main_transmisor.c: 70: _delay((unsigned long)((10)*(20000000/4000.0)));
+   497  007EEC  0E41               	movlw	65
+   498  007EEE  6E01               	movwf	??_main& (0+255),c
+   499  007EF0  0EEE               	movlw	238
+   500  007EF2                     u527:
+   501  007EF2  2EE8               	decfsz	wreg,f,c
+   502  007EF4  D7FE               	goto	u527
+   503  007EF6  2E01               	decfsz	??_main& (0+255),f,c
+   504  007EF8  D7FC               	goto	u527
+   505  007EFA  D000               	nop2	
+   506                           
+   507                           ;main_transmisor.c: 71: while (z<T && RD1 ==1){
+   508  007EFC  D00A               	goto	l61
+   509  007EFE                     l822:
+   510                           
+   511                           ;main_transmisor.c: 73: z=z++;}
+   512  007EFE  0E41               	movlw	65
+   513  007F00  6E01               	movwf	??_main& (0+255),c
+   514  007F02  0EEE               	movlw	238
+   515  007F04                     u537:
+   516  007F04  2EE8               	decfsz	wreg,f,c
+   517  007F06  D7FE               	goto	u537
+   518  007F08  2E01               	decfsz	??_main& (0+255),f,c
+   519  007F0A  D7FC               	goto	u537
+   520  007F0C  D000               	nop2	
+   521  007F0E  4A52               	infsnz	main@z,f,c
+   522  007F10  2A53               	incf	main@z+1,f,c
+   523  007F12                     l61:
+   524  007F12  504E               	movf	main@T,w,c
+   525  007F14  5C52               	subwf	main@z,w,c
+   526  007F16  5053               	movf	main@z+1,w,c
+   527  007F18  0A80               	xorlw	128
+   528  007F1A  6E01               	movwf	??_main& (0+255),c
+   529  007F1C  504F               	movf	main@T+1,w,c
+   530  007F1E  0A80               	xorlw	128
+   531  007F20  5801               	subwfb	??_main& (0+255),w,c
+   532  007F22  A0D8               	btfss	status,0,c
+   533  007F24  A283               	btfss	3971,1,c	;volatile
+   534  007F26  D001               	goto	l56
+   535  007F28  D7EA               	goto	l822
+   536  007F2A                     l56:
+   537  007F2A  A483               	btfss	3971,2,c	;volatile
+   538  007F2C  D024               	goto	l67
+   539  007F2E  D7DA               	goto	l58
+   540  007F30                     l69:
+   541  007F30  A2AC               	btfss	4012,1,c	;volatile
+   542  007F32  D7FE               	goto	l69
+   543                           
+   544                           ;main_transmisor.c: 78: TXREG = 'A';
+   545  007F34  0E41               	movlw	65
+   546  007F36  6EAD               	movwf	4013,c	;volatile
+   547                           
+   548                           ;main_transmisor.c: 79: _delay((unsigned long)((10)*(20000000/4000.0)));
+   549  007F38  0E41               	movlw	65
+   550  007F3A  6E01               	movwf	??_main& (0+255),c
+   551  007F3C  0EEE               	movlw	238
+   552  007F3E                     u547:
+   553  007F3E  2EE8               	decfsz	wreg,f,c
+   554  007F40  D7FE               	goto	u547
+   555  007F42  2E01               	decfsz	??_main& (0+255),f,c
+   556  007F44  D7FC               	goto	u547
+   557  007F46  D000               	nop2	
+   558                           
+   559                           ;main_transmisor.c: 80: while (z<T && RD1 ==1){
+   560  007F48  D00A               	goto	l72
+   561  007F4A                     l832:
+   562                           
+   563                           ;main_transmisor.c: 82: z=z++;}
+   564  007F4A  0E41               	movlw	65
+   565  007F4C  6E01               	movwf	??_main& (0+255),c
+   566  007F4E  0EEE               	movlw	238
+   567  007F50                     u557:
+   568  007F50  2EE8               	decfsz	wreg,f,c
+   569  007F52  D7FE               	goto	u557
+   570  007F54  2E01               	decfsz	??_main& (0+255),f,c
+   571  007F56  D7FC               	goto	u557
+   572  007F58  D000               	nop2	
+   573  007F5A  4A52               	infsnz	main@z,f,c
+   574  007F5C  2A53               	incf	main@z+1,f,c
+   575  007F5E                     l72:
+   576  007F5E  504E               	movf	main@T,w,c
+   577  007F60  5C52               	subwf	main@z,w,c
+   578  007F62  5053               	movf	main@z+1,w,c
+   579  007F64  0A80               	xorlw	128
+   580  007F66  6E01               	movwf	??_main& (0+255),c
+   581  007F68  504F               	movf	main@T+1,w,c
+   582  007F6A  0A80               	xorlw	128
+   583  007F6C  5801               	subwfb	??_main& (0+255),w,c
+   584  007F6E  A0D8               	btfss	status,0,c
+   585  007F70  A283               	btfss	3971,1,c	;volatile
+   586  007F72  D001               	goto	l67
+   587  007F74  D7EA               	goto	l832
+   588  007F76                     l67:
+   589  007F76  B683               	btfsc	3971,3,c	;volatile
+   590  007F78  D7DB               	goto	l69
+   591                           
+   592                           ;main_transmisor.c: 83: }
+   593                           ;main_transmisor.c: 87: if (i<3){
+   594  007F7A  BE51               	btfsc	main@i+1,7,c
+   595  007F7C  D006               	goto	l840
+   596  007F7E  5051               	movf	main@i+1,w,c
+   597  007F80  E118               	bnz	l848
+   598  007F82  0E03               	movlw	3
+   599  007F84  5C50               	subwf	main@i,w,c
+   600  007F86  B0D8               	btfsc	status,0,c
+   601  007F88  D014               	goto	l848
+   602  007F8A                     l840:
+   603                           
+   604                           ;main_transmisor.c: 88: j=i;
+   605  007F8A  C050  F04C         	movff	main@i,main@j
+   606  007F8E  C051  F04D         	movff	main@i+1,main@j+1
+   607                           
+   608                           ;main_transmisor.c: 90: i=i++;
+   609  007F92  90D8               	bcf	status,0,c
+   610  007F94  344C               	rlcf	main@j,w,c
+   611  007F96  6ED9               	movwf	fsr2l,c
+   612  007F98  344D               	rlcf	main@j+1,w,c
+   613  007F9A  6EDA               	movwf	fsr2h,c
+   614  007F9C  0E44               	movlw	low main@x
+   615  007F9E  26D9               	addwf	fsr2l,f,c
+   616  007FA0  0E00               	movlw	high main@x
+   617  007FA2  22DA               	addwfc	fsr2h,f,c
+   618  007FA4  0E00               	movlw	0
+   619  007FA6  6EDE               	movwf	postinc2,c
+   620  007FA8  0E00               	movlw	0
+   621  007FAA  6EDD               	movwf	postdec2,c
+   622  007FAC  4A50               	infsnz	main@i,f,c
+   623  007FAE  2A51               	incf	main@i+1,f,c
+   624  007FB0  D015               	goto	L1
+   625  007FB2                     l848:
+   626                           
+   627                           ;main_transmisor.c: 93: else{
+   628                           ;main_transmisor.c: 94: j=0;
+   629  007FB2  0E00               	movlw	0
+   630  007FB4  6E4D               	movwf	main@j+1,c
+   631  007FB6  0E00               	movlw	0
+   632  007FB8  6E4C               	movwf	main@j,c
+   633                           
+   634                           ;main_transmisor.c: 95: x[j]=0;
+   635  007FBA  90D8               	bcf	status,0,c
+   636  007FBC  344C               	rlcf	main@j,w,c
+   637  007FBE  6ED9               	movwf	fsr2l,c
+   638  007FC0  344D               	rlcf	main@j+1,w,c
+   639  007FC2  6EDA               	movwf	fsr2h,c
+   640  007FC4  0E44               	movlw	low main@x
+   641  007FC6  26D9               	addwf	fsr2l,f,c
+   642  007FC8  0E00               	movlw	high main@x
+   643  007FCA  22DA               	addwfc	fsr2h,f,c
+   644  007FCC  0E00               	movlw	0
+   645  007FCE  6EDE               	movwf	postinc2,c
+   646  007FD0  0E00               	movlw	0
+   647  007FD2  6EDD               	movwf	postdec2,c
+   648                           
+   649                           ;main_transmisor.c: 96: i=0;
+   650  007FD4  0E00               	movlw	0
+   651  007FD6  6E51               	movwf	main@i+1,c
+   652  007FD8  0E00               	movlw	0
+   653  007FDA  6E50               	movwf	main@i,c
+   654  007FDC                     L1:
+   655                           
+   656                           ;main_transmisor.c: 97: x[i]=1;
+   657  007FDC  90D8               	bcf	status,0,c
+   658  007FDE  3450               	rlcf	main@i,w,c
+   659  007FE0  6ED9               	movwf	fsr2l,c
+   660  007FE2  3451               	rlcf	main@i+1,w,c
+   661  007FE4  6EDA               	movwf	fsr2h,c
+   662  007FE6  0E44               	movlw	low main@x
+   663  007FE8  26D9               	addwf	fsr2l,f,c
+   664  007FEA  0E00               	movlw	high main@x
+   665  007FEC  22DA               	addwfc	fsr2h,f,c
+   666  007FEE  0E01               	movlw	1
+   667  007FF0  6EDE               	movwf	postinc2,c
+   668  007FF2  0E00               	movlw	0
+   669  007FF4  6EDD               	movwf	postdec2,c
+   670                           
+   671                           ;main_transmisor.c: 98: }
+   672                           ;main_transmisor.c: 99: z=0;
+   673  007FF6  0E00               	movlw	0
+   674  007FF8  6E53               	movwf	main@z+1,c
+   675  007FFA  0E00               	movlw	0
+   676  007FFC  6E52               	movwf	main@z,c
+   677  007FFE  D70A               	goto	l788
+   678  008000                     __end_of_main:
+   679                           	opt stack 0
+   680  0000                     tblptru	equ	0xFF8
+   681                           tblptrh	equ	0xFF7
+   682                           tblptrl	equ	0xFF6
+   683                           tablat	equ	0xFF5
+   684                           postinc0	equ	0xFEE
+   685                           wreg	equ	0xFE8
+   686                           postdec1	equ	0xFE5
+   687                           plusw1	equ	0xFE3
+   688                           fsr1l	equ	0xFE1
+   689                           postinc2	equ	0xFDE
+   690                           postdec2	equ	0xFDD
+   691                           plusw2	equ	0xFDB
+   692                           fsr2h	equ	0xFDA
+   693                           fsr2l	equ	0xFD9
+   694                           status	equ	0xFD8
+   695                           tblptru	equ	0xFF8
+   696                           tblptrh	equ	0xFF7
+   697                           tblptrl	equ	0xFF6
+   698                           tablat	equ	0xFF5
+   699                           postinc0	equ	0xFEE
+   700                           wreg	equ	0xFE8
+   701                           postdec1	equ	0xFE5
+   702                           plusw1	equ	0xFE3
+   703                           fsr1l	equ	0xFE1
+   704                           postinc2	equ	0xFDE
+   705                           postdec2	equ	0xFDD
+   706                           plusw2	equ	0xFDB
+   707                           fsr2h	equ	0xFDA
+   708                           fsr2l	equ	0xFD9
+   709                           status	equ	0xFD8
+   710                           
+   711                           	psect	rparam
+   712  0000                     tblptru	equ	0xFF8
+   713                           tblptrh	equ	0xFF7
+   714                           tblptrl	equ	0xFF6
+   715                           tablat	equ	0xFF5
+   716                           postinc0	equ	0xFEE
+   717                           wreg	equ	0xFE8
+   718                           postdec1	equ	0xFE5
+   719                           plusw1	equ	0xFE3
+   720                           fsr1l	equ	0xFE1
+   721                           postinc2	equ	0xFDE
+   722                           postdec2	equ	0xFDD
+   723                           plusw2	equ	0xFDB
+   724                           fsr2h	equ	0xFDA
+   725                           fsr2l	equ	0xFD9
+   726                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        72
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     83      91
+    BANK0           160      0      64
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                91    91      0     511
+                                              0 COMRAM    83    83      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 0
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             7FF      0       0      21        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK7           100      0       0      18        0.0%
+BANK7              100      0       0      19        0.0%
+BITBANK6           100      0       0      16        0.0%
+BANK6              100      0       0      17        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0      40       5       40.0%
+BITCOMRAM           5F      0       0       0        0.0%
+COMRAM              5F     53      5B       1       95.8%
+BITSFR               0      0       0      40        0.0%
+SFR                  0      0       0      40        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      9B      20        0.0%
+DATA                 0      0      9B       3        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
+Symbol Table                                                                                   Thu Nov 03 14:44:16 2022
+
+                     l50 7EC6                       l34 7E92                       l36 7E4C  
+                     l61 7F12                       l45 7EDE                       l47 7E98  
+                     l39 7E7A                       l72 7F5E                       l56 7F2A  
+                     l58 7EE4                       l67 7F76                       l69 7F30  
+                    l802 7E66                      l812 7EB2                      l822 7EFE  
+                    l840 7F8A                      l832 7F4A                      l848 7FB2  
+                    l788 7E14                      _RD0 007C18                      _RD1 007C19  
+                    _RD2 007C1A                      _RD3 007C1B                      u241 7DFA  
+                    u251 7E0C                      u265 7E1C                      u266 7E1E  
+                    u507 7EA6                      u275 7E26                      u276 7E28  
+                    u517 7EB8                      u285 7E30                      u286 7E32  
+                    u527 7EF2                      u295 7E3A                      u296 7E3C  
+                    u537 7F04                      u547 7F3E                      u557 7F50  
+                    u477 7E42                      u487 7E5A                      u497 7E6C  
+           __CFG_BOR$OFF 000000                      wreg 000FE8             __CFG_LVP$OFF 000000  
+           __CFG_WDT$OFF 000000                     _main 7DB2                     fsr2h 000FDA  
+                   fsr1l 000FE1                     fsr2l 000FD9                     start 0000  
+          __CFG_IESO$OFF 000000            __CFG_MCLRE$ON 000000             ___param_bank 000010  
+          __CFG_PLLDIV$5 000000                    ?_main 0001            __CFG_USBDIV$2 000000  
+                  _TRISD 000F95                    _TXREG 000FAD            __CFG_PWRT$OFF 000000  
+         __CFG_FCMEN$OFF 000000                    main@T 004E                    main@i 0050  
+                  main@j 004C                    main@x 0044                    main@z 0052  
+                  tablat 000FF5                    plusw1 000FE3                    plusw2 000FDB  
+                  status 000FD8           __CFG_ICPRT$OFF 000000          __initialization 7D6C  
+           __end_of_main 8000                   ??_main 0001            __activetblptr 000000  
+                 _ADCON1 000FC1           __CFG_XINST$OFF 000000           __CFG_STVREN$ON 000000  
+           __pdataCOMRAM 0054                   tblptrh 000FF7                   tblptrl 000FF6  
+                 tblptru 000FF8               __accesstop 0060  __end_of__initialization 7DAC  
+        __CFG_PBADEN$OFF 000000            ___rparam_used 000001           __pcstackCOMRAM 0001  
+           __pidataBANK0 7D2C          __CFG_VREGEN$OFF 000000                  __Hparam 0000  
+                __Lparam 0000                  __pcinit 7D6C                  __ramtop 0800  
+                __ptext0 7DB2     end_of_initialization 7DAC                _RCSTAbits 000FAB  
+                postdec1 000FE5                  postdec2 000FDD                  postinc0 000FEE  
+                postinc2 000FDE                _PORTDbits 000F83                _TRISCbits 000F94  
+              _TXSTAbits 000FAC              _BAUDCONbits 000FB8            __pidataCOMRAM 7D24  
+    start_initialization 7D6C              __pdataBANK0 0060         __CFG_LPT1OSC$OFF 000000  
+       __CFG_WDTPS$32768 000000                main@F4452 0060                main@F4448 0054  
+              main@Place 0042                copy_data0 7D80                copy_data1 7DA0  
+               __Hrparam 0000                 __Lrparam 0000            __size_of_main 024E  
+               main@disp 0002    __CFG_CPUDIV$OSC1_PLL2 000000       __CFG_FOSC$HSPLL_HS 000000  
