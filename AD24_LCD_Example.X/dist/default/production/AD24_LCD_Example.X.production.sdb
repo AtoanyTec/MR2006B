@@ -1,0 +1,133 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4550 ]
+[d frameptr 4065 ]
+"4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"30 C:\Users\afier\MPLABXProjects\AD24_LCD_Example.X\LCD.c
+[v _LCD_DATA LCD_DATA `(v  1 e 1 0 ]
+"49
+[v _LCD_CMD LCD_CMD `(v  1 e 1 0 ]
+"58
+[v _LCD_Clear LCD_Clear `(v  1 e 1 0 ]
+"63
+[v _LCD_Set_Cursor LCD_Set_Cursor `(v  1 e 1 0 ]
+"83
+[v _LCD_Init LCD_Init `(v  1 e 1 0 ]
+"105
+[v _LCD_Write_Char LCD_Write_Char `(v  1 e 1 0 ]
+"122
+[v _LCD_Write_String LCD_Write_String `(v  1 e 1 0 ]
+"23 C:\Users\afier\MPLABXProjects\AD24_LCD_Example.X\LCD_example.c
+[v _main main `(v  1 e 1 0 ]
+"3625 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4550.h
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"10359
+[v _RB0 RB0 `VEb  1 e 0 @31752 ]
+"10362
+[v _RB1 RB1 `VEb  1 e 0 @31753 ]
+"10365
+[v _RB2 RB2 `VEb  1 e 0 @31754 ]
+"10368
+[v _RB3 RB3 `VEb  1 e 0 @31755 ]
+"10371
+[v _RB4 RB4 `VEb  1 e 0 @31756 ]
+"10374
+[v _RB5 RB5 `VEb  1 e 0 @31757 ]
+"10914
+[v _TRISB4 TRISB4 `VEb  1 e 0 @31900 ]
+"10917
+[v _TRISB5 TRISB5 `VEb  1 e 0 @31901 ]
+"23 C:\Users\afier\MPLABXProjects\AD24_LCD_Example.X\LCD_example.c
+[v _main main `(v  1 e 1 0 ]
+{
+"54
+} 0
+"122 C:\Users\afier\MPLABXProjects\AD24_LCD_Example.X\LCD.c
+[v _LCD_Write_String LCD_Write_String `(v  1 e 1 0 ]
+{
+"124
+[v LCD_Write_String@i i `i  1 a 2 8 ]
+"122
+[v LCD_Write_String@str str `*.32uc  1 p 2 4 ]
+"127
+} 0
+"105
+[v _LCD_Write_Char LCD_Write_Char `(v  1 e 1 0 ]
+{
+[v LCD_Write_Char@Data Data `uc  1 a 1 wreg ]
+"107
+[v LCD_Write_Char@High4 High4 `uc  1 a 1 2 ]
+[v LCD_Write_Char@Low4 Low4 `uc  1 a 1 1 ]
+"105
+[v LCD_Write_Char@Data Data `uc  1 a 1 wreg ]
+"108
+[v LCD_Write_Char@Data Data `uc  1 a 1 3 ]
+"121
+} 0
+"63
+[v _LCD_Set_Cursor LCD_Set_Cursor `(v  1 e 1 0 ]
+{
+[v LCD_Set_Cursor@r r `uc  1 a 1 wreg ]
+"65
+[v LCD_Set_Cursor@Temp Temp `uc  1 a 1 6 ]
+[v LCD_Set_Cursor@High4 High4 `uc  1 a 1 5 ]
+[v LCD_Set_Cursor@Low4 Low4 `uc  1 a 1 4 ]
+"63
+[v LCD_Set_Cursor@r r `uc  1 a 1 wreg ]
+[v LCD_Set_Cursor@c c `uc  1 p 1 2 ]
+"66
+[v LCD_Set_Cursor@r r `uc  1 a 1 3 ]
+"82
+} 0
+"83
+[v _LCD_Init LCD_Init `(v  1 e 1 0 ]
+{
+"104
+} 0
+"58
+[v _LCD_Clear LCD_Clear `(v  1 e 1 0 ]
+{
+"62
+} 0
+"49
+[v _LCD_CMD LCD_CMD `(v  1 e 1 0 ]
+{
+[v LCD_CMD@CMD CMD `uc  1 a 1 wreg ]
+[v LCD_CMD@CMD CMD `uc  1 a 1 wreg ]
+"52
+[v LCD_CMD@CMD CMD `uc  1 a 1 1 ]
+"57
+} 0
+"30
+[v _LCD_DATA LCD_DATA `(v  1 e 1 0 ]
+{
+[v LCD_DATA@Data Data `uc  1 a 1 wreg ]
+[v LCD_DATA@Data Data `uc  1 a 1 wreg ]
+"32
+[v LCD_DATA@Data Data `uc  1 a 1 0 ]
+"48
+} 0
